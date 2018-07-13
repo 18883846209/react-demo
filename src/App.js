@@ -1,34 +1,25 @@
 import React, { Component } from 'react';
 import 'babel-polyfill';
+import {BrowserRouter, Route, Link} from 'react-router-dom';
 // import logo from './logo.svg';
 // import Btn from './btns/btn';
 // import Login from './login/login';
 // import Li from './lis/lis';
-import route from './route';
+import About from './about/about';
+// import route from './route';
 import './App.css';
 
 
 class App extends Component {
   render() {
     return (
-        // <div>
-        //   <header className="App-header">
-        //     <img src={logo} className="App-logo" alt="logo" />
-        //     <h1 className="App-title">Welcome to React</h1>
-        //   </header>
-        //   <p className="App-intro">
-        //     To get started, edit <code>src/App.js</code> and save to reload.
-        //   </p>
-        //   <div className="out">
-        //     <div className="inner">
-        //       <img src="https://sandbox.runjs.cn/uploads/rs/445/n8vp1ns5/2e2eb9389b504fc2314.jpg" alt="logo"/>
-        //     </div>
-        //   </div>
-        //   <Btn className="test" />
-        //   <Login isadd onClick={ this.cons } />
-        //   <Li />
-        // </div>
-        <route />
+      <BrowserRouter>
+          <div>
+              <div><Link to="/about">About</Link></div>
+              {/*注意这个地方path的值要跟上面Link的to一样*/}
+              <Route path="/about" component={About}/>
+          </div>
+      </BrowserRouter>
     );
   }
 }
