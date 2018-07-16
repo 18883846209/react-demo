@@ -50,3 +50,7 @@
   clip-path: circle(50% at 50% 50%);
   /* clip-path: ellipse(25% at 50% 50%); */
 }
+.alink a {
+  text-decoration: none;
+  color: #222;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'babel-polyfill';
+// import { Link } from 'react-router-dom';
 import './login.css';
 
 class Login extends Component {
@@ -31,8 +32,11 @@ class Login extends Component {
         classname += ' test'
     }
     return (
-      <div className={ classname } onClick={this.props.onClick}>
-        islogin:{ this.state.islogin ? 1 : 0 }
+      <div>
+        {/* <div className="alink"><Link to="/about">About</Link></div> */}
+        <div className={ classname } onClick={this.onLogin}>
+          islogin:{ this.state.islogin ? 1 : 0 }
+        </div>
       </div>
     );
   }
