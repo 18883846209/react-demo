@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'babel-polyfill';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 // import logo from './logo.svg';
 import Btn from './btns/btn';
 import Login from './login/login';
@@ -17,7 +17,7 @@ class Routes extends Component {
           <div>
             <Switch>
               <Route exact path="/" component={ Home }></Route>
-              <Route path="/about" component={ About }></Route>
+              <Route path="/about/:id/:name/:age" component={ About }></Route>
               <Route path="/btn" component={ Btn }></Route>
               <Route path="/login" component={ Login }></Route>
               <Route path="/li" component={ Li }></Route>
