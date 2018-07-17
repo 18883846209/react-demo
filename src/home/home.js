@@ -1,8 +1,8 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './home.css';
 import axios from 'axios';
+import './home.css';
 
 class Home extends Component {
   constructor(props) {
@@ -18,11 +18,16 @@ class Home extends Component {
     console.log(this.state.params);
   }
   componentDidMount() { // 网络请求放在该生命周期内
-    setTimeout(() => {
-      this.setState({
-        data: 'update state data'
-      });
-    }, 1500);
+    this.setState({
+      data: 'update state data'
+    });
+    axios.get('https://www.easy-mock.com/mock/5b4c5fb27566935928eeb4f1/example/mock')
+    .then((value) => {
+      console.log(value.data.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
   render() {
     let params = this.state.params;

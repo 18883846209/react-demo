@@ -1,25 +1,7 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import Btn from '../btns/btn';
 import './about.css';
-import { isNull, isUndefined } from 'util';
-
-// const Desc = ({ match }) => {
-//   <div>
-//     <div>this is about desc</div>
-//     <div>{ match }</div>
-//   </div>
-// };
-
-class Desc extends Comment {
-  render () {
-    return (
-      <div>
-        <div>this is about desc</div>
-      </div>
-    )
-  }
-}
 
 class About extends Component {
   render() {
@@ -29,6 +11,7 @@ class About extends Component {
         <div>this is about page</div>
         {/* <div className="desc"><Link to="/about/:desc">this is about desc</Link></div>
         <Route path='desc' component={ Desc }></Route> */}
+        <Btn text="this is a button" ownerclass="aboutbtn" />
       </div>
     );
   }

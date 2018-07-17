@@ -14,9 +14,10 @@ class Btn extends Component {
     });
   }
   render() {
+    let classname = this.props.ownerclass ? `btn ${this.props.ownerclass}` : 'btn';
     return (
-      <div className="btn" onClick={this.onClickBtn}>
-        { this.props.text }btn
+      <div className={ classname } onClick={this.onClickBtn}>
+        { this.props.text ? this.props.text : 'btn' }
       </div>
     );
   }

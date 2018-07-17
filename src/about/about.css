@@ -3,7 +3,15 @@
     margin-top: 50px;
     font-size: 20px;
 }
-.desc {
-    text-align: center;
+.aboutbtn {
     margin-top: 30px;
+    animation: flash .8s 2;
 }
+/* @keyframes flash {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(100px, 0, 0);
+    }
+} */
