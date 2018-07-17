@@ -16,7 +16,7 @@ class Btn extends Component {
   render() {
     return (
       <div className="btn" onClick={this.onClickBtn}>
-        click count:{ this.state.count }
+        { this.props.text }btn
       </div>
     );
   }
