@@ -7,6 +7,7 @@ import Login from './login/login';
 import Li from './lis/lis';
 import About from './about/about';
 import Home from './home/home';
+import Input from './input/input';
 import './App.css';
 
 
@@ -21,6 +22,7 @@ class Routes extends Component {
               <Route path="/btn" component={ Btn }></Route>
               <Route path="/login" component={ Login }></Route>
               <Route path="/li" component={ Li }></Route>
+              <Route path="/input" component={ Input }></Route>
             </Switch>
           </div>
         </Router>

@@ -10,12 +10,13 @@ class Home extends Component {
     this.handle = this.handle.bind(this);
     this.state = {
       params: ['jason', 'undefined'],
-      data: ''
+      data: '',
+      arr: []
     };
   }
   handle() {
     this.state.params.push('aaa');
-    console.log(this.state.params);
+    // console.log(this.state.params);
   }
   componentDidMount() { // 网络请求放在该生命周期内
     this.setState({
@@ -23,7 +24,11 @@ class Home extends Component {
     });
     axios.get('https://www.easy-mock.com/mock/5b4c5fb27566935928eeb4f1/example/mock')
     .then((value) => {
-      console.log(value.data.data);
+      // console.log(value.data.data.projects);
+      this.setState({
+        arr: value.data.data.projects
+      });
+      console.log(this.state.arr);
     })
     .catch((err) => {
       console.log(err);
@@ -32,7 +37,7 @@ class Home extends Component {
   render() {
     let params = this.state.params;
     // params.push('test');
-    console.log(params);
+    // console.log(params);
     return (
       <div>
         {/* <div className="home"><Link to="/about">go to about</Link></div> */}
@@ -41,6 +46,10 @@ class Home extends Component {
         <div className="home"><Link to="/login">go to login</Link></div>
         <div className="home"><Link to="/btn">go to btn</Link></div>
         <div className="home"><Link to="/li">go to li</Link></div>
+        <div className="home"><Link to="/input">go to input</Link></div>
+        { this.state.arr && this.state.arr.map((item, index) => 
+          <div className="item" key={ index }>测试：{ item.name }</div>
+        ) }
       </div>
     );
   }
