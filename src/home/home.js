@@ -2,23 +2,50 @@ import 'babel-polyfill';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import lrz from 'lrz';
+import scale from '../scale';
+import '../transform';
 import './home.css';
+import { Transform } from 'stream';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.handle = this.handle.bind(this);
+    this.upfile = this.upfile.bind(this);
     this.state = {
       params: ['jason', 'undefined'],
       data: '',
-      arr: []
+      arr: [],
+      src: '',
+      dom: ''
     };
   }
   handle() {
     this.state.params.push('aaa');
     // console.log(this.state.params);
   }
+  upfile(e) {
+    let file = e.target.files[0];
+    // console.log(file);
+    lrz(file, {width: 250, quality: 0.6})
+    .then(rst => {
+        let uploadImg = rst.base64;
+        // console.log(uploadImg);
+        this.setState({
+          src: uploadImg
+        });
+    })
+  }
   componentDidMount() { // 网络请求放在该生命周期内
+    // console.log(this.refs.img);
+    let img = this.refs.img;
+    Transform(img);
+    new scale(img, {
+      pinch: function (evt) {
+        img.scaleX = img.scaleY = evt.zoom;
+    }
+    });
     this.setState({
       data: 'update state data'
     });
@@ -28,7 +55,7 @@ class Home extends Component {
       this.setState({
         arr: value.data.data.projects
       });
-      console.log(this.state.arr);
+      // console.log(this.state.src);
     })
     .catch((err) => {
       console.log(err);
@@ -47,9 +74,14 @@ class Home extends Component {
         <div className="home"><Link to="/btn">go to btn</Link></div>
         <div className="home"><Link to="/li">go to li</Link></div>
         <div className="home"><Link to="/input">go to input</Link></div>
-        { this.state.arr && this.state.arr.map((item, index) => 
+        <div className="home">
+          <input type="file" name="file" className="input" onChange={ this.upfile } />
+          <label htmlFor="file" className="choose">choose a file</label>
+          <img src={ this.state.src ? this.state.src : '' } ref="img" alt="img" />
+        </div>
+        {/* { this.state.arr && this.state.arr.map((item, index) =>
           <div className="item" key={ index }>测试：{ item.name }</div>
-        ) }
+        ) } */}
       </div>
     );
   }
