@@ -1,12 +1,13 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import lrz from 'lrz';
 import scale from '../scale';
 import '../transform';
 import './home.css';
 import { Transform } from 'stream';
+const arr = [11, 22, 33, 44];
 
 class Home extends Component {
   constructor(props) {
@@ -18,8 +19,14 @@ class Home extends Component {
       data: '',
       arr: [],
       src: '',
-      dom: ''
+      dom: '',
+      selectedIndex: null
     };
+  }
+  click(id) {
+    this.setState({
+      selectedIndex: id
+    });
   }
   handle() {
     this.state.params.push('aaa');
@@ -38,7 +45,7 @@ class Home extends Component {
     })
   }
   componentDidMount() { // 网络请求放在该生命周期内
-    // console.log(this.refs.img);
+    console.log(window.location);
     let img = this.refs.img;
     Transform(img);
     new scale(img, {
@@ -49,17 +56,17 @@ class Home extends Component {
     this.setState({
       data: 'update state data'
     });
-    axios.get('https://www.easy-mock.com/mock/5b4c5fb27566935928eeb4f1/example/mock')
-    .then((value) => {
-      // console.log(value.data.data.projects);
-      this.setState({
-        arr: value.data.data.projects
-      });
-      // console.log(this.state.src);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    // axios.get('https://www.easy-mock.com/mock/5b4c5fb27566935928eeb4f1/example/mock')
+    // .then((value) => {
+    //   // console.log(value.data.data.projects);
+    //   this.setState({
+    //     arr: value.data.data.projects
+    //   });
+    //   // console.log(this.state.src);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
   }
   render() {
     let params = this.state.params;
@@ -67,6 +74,11 @@ class Home extends Component {
     // console.log(params);
     return (
       <div>
+        <div>
+          {arr.map((item, index) => 
+            <div className={index === this.state.selectedIndex ? 'acvtive' : ''} onClick={() => this.click(index)}>{item}</div>
+          )}
+        </div>
         {/* <div className="home"><Link to="/about">go to about</Link></div> */}
         <div className="home" onClick={ this.handle }>{ this.state.data }</div>
         <div className="home"><Link to={ `/about/${params.join('/')}` }>go to about</Link></div>
@@ -79,6 +91,10 @@ class Home extends Component {
           <label htmlFor="file" className="choose">choose a file</label>
           <img src={ this.state.src ? this.state.src : '' } ref="img" alt="img" />
         </div>
+        <input type="text" placeholder="search" />
+        <div className="test1"></div>
+        <div className="test2"></div>
+        <div className="test3"></div>
         {/* { this.state.arr && this.state.arr.map((item, index) =>
           <div className="item" key={ index }>测试：{ item.name }</div>
         ) } */}
